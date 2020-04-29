@@ -12,6 +12,8 @@ export class WalletController {
         return res.status(200).send({
             id: wallet.id,
             address: wallet.address,
+            publicKey: wallet.publicKey,
+            privateKey: wallet.privateKey,
             message: 'Wallet success generated!'
         });
     }

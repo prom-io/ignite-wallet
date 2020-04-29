@@ -35,6 +35,7 @@
     "class-validator": "^0.12.2",
     "ethereumjs-tx": "^2.1.2",
     "ethereumjs-util": "^6.2.0",
+    "global": "^4.4.0",
     "hdkey": "^1.1.2",
     "pg": "^8.0.3",
     "pgsql": "^1.0.0",
@@ -42,6 +43,7 @@
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3",
     "typeorm": "^0.2.24",
+    "vue-cli": "^2.9.6",
     "web3": "^1.2.7"
   },
   "devDependencies": {

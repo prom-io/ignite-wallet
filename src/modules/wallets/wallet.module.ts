@@ -5,10 +5,11 @@ import {WalletService} from "./services/wallet.service";
 import {WalletFactory} from "./factories/wallet.factory";
 import {WalletRepository} from "../../repositories/WalletRepository";
 import {Web3Service} from "../web3/web3.service";
+import {WalletFetcher} from "./fetchers/wallet.fetcher";
 
 @Module({
     imports: [],
     controllers: [WalletController],
-    providers: [CreateWalletHandler, WalletService, WalletFactory, WalletRepository, Web3Service],
+    providers: [CreateWalletHandler, WalletService, WalletFactory, WalletRepository, Web3Service, WalletFetcher],
 })
 export class WalletModule {}

@@ -7,6 +7,14 @@ export class WalletRepository {
 
     constructor(private manager: EntityManager) {}
 
+    public pagination(page: number = 0, pageSize: number = 0) {
+        return this.manager.find(Wallets, { skip: page, take: pageSize })
+    }
+
+    public all() {
+        return this.manager.find(Wallets);
+    }
+
     public getMasterAccount() {
         return this.manager.findOne(Wallets, { type: WalletTypes.MASTER });
     }

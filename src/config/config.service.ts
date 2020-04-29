@@ -4,6 +4,7 @@ import {AbiItem} from 'web3-utils';
 import {TypeOrmModuleOptions} from "@nestjs/typeorm";
 import {Wallets} from "../entities/Wallets";
 import {Transactions} from "../entities/Transactions";
+import {User} from "../entities/User";
 
 export class ConfigService {
     private readonly envConfig: { [key: string]: string };
@@ -24,7 +25,7 @@ export class ConfigService {
             username: this.get('POSTGRES_USER'),
             password: this.get('POSTGRES_PASSWORD'),
             database: this.get('POSTGRES_DATABASE'),
-            entities: [Wallets, Transactions],
+            entities: [Wallets, Transactions, User],
             synchronize: true,
             ssl: false,
         };

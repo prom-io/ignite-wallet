@@ -5,6 +5,7 @@ import {WalletModule} from "./modules/wallets/wallet.module";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {ConfigService} from "./config/config.service";
 import {PromTokenModule} from "./modules/promToken/promToken.module";
+import {UserModule} from "./modules/users/user.module";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import {PromTokenModule} from "./modules/promToken/promToken.module";
       Web3Module,
       WalletModule,
       PromTokenModule,
+      UserModule,
   ],
   controllers: [],
   providers: [],

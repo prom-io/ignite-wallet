@@ -7,7 +7,7 @@ RUN yarn build
 
 FROM node:10-alpine
 RUN yarn add web3
-RUN yarn add bcryptjs @nestjs/passport @nestjs/common reflect-metadata rxjs passport @nestjs/jwt passport-local passport-jwt 
+RUN yarn add bcryptjs @nestjs/passport @nestjs/common reflect-metadata rxjs passport @nestjs/jwt passport-local passport-jwt
 RUN yarn --version
 WORKDIR /app
 COPY --from=builder /app ./

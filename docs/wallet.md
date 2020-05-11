@@ -17,6 +17,8 @@ Status: 200
 {
 	"id": 1,
 	"address": "0x611a44A5cCD53A75d666033f609aF8468e07D80e",
+	"publicKey": "sadasd",
+	"privateKey": "sadasd",
 	"message": "Wallet success generated!"
 }
 ```

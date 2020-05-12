@@ -11,6 +11,7 @@ services:
       - ${API_PORT}:3000
     depends_on:
       - ignite-wallet-postgres
+      - ignite-wallet-redis
     volumes:
     - /app/node_modules
   ignite-wallet-postgres:
@@ -34,5 +35,15 @@ services:
       - ${PGADMIN_PORT}:80
     depends_on:
       - ignite-wallet-postgres
+  ignite-wallet-redis:
+    image: redis:3-alpine
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+    volumes:
+      - ignite-wallet-redis:/data
+    healthcheck:
+      test: redis-cli PING
+      timeout: 3s
 volumes:
   ignite-wallet-postgres:
+  ignite-wallet-redis:

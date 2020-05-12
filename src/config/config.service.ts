@@ -5,6 +5,7 @@ import {TypeOrmModuleOptions} from "@nestjs/typeorm";
 import {Wallets} from "../entities/Wallets";
 import {Transactions} from "../entities/Transactions";
 import {User} from "../entities/User";
+import {RedisModuleAsyncOptions, RedisModuleOptions} from "nestjs-redis";
 
 export class ConfigService {
     private readonly envConfig: { [key: string]: string };
@@ -16,6 +17,14 @@ export class ConfigService {
     get(key: string): string {
         return this.envConfig[key];
     }
+
+    getRedisConfig(): RedisModuleOptions {
+        return {
+            host: this.get('REDIS_HOST'),
+            port: parseInt(this.get('REDIS_PORT')),
+        };
+    }
+
 
     getTypeOrmConfig(): TypeOrmModuleOptions {
         return {

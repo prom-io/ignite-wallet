@@ -10,11 +10,7 @@ import {UserRepository} from "../../repositories/UserRepository";
 
 @Module({
     imports: [
-        PassportModule.register({
-            defaultStrategy: 'jwt',
-            property: 'user',
-            session: false
-        }),
+        PassportModule,
         JwtModule.register({
             secret: jwtConstants.secret,
             signOptions: { expiresIn: '7d' }

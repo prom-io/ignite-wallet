@@ -11,7 +11,7 @@ export class WalletController {
         private readonly walletFetcher: WalletFetcher,
     ) {}
 
-    @UseGuards(AuthGuard())
+    @UseGuards(AuthGuard('jwt'))
     @Get('/generate')
     public async generate(@Res() res: Response): Promise<any> {
         try {
@@ -28,7 +28,7 @@ export class WalletController {
         }
     }
 
-    @UseGuards(AuthGuard())
+    @UseGuards(AuthGuard('jwt'))
     @Get('/all')
     public async all(@Res() res: Response): Promise<any> {
         const wallets = await this.walletFetcher.all();

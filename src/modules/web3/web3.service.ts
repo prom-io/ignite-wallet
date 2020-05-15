@@ -10,6 +10,14 @@ export class Web3Service {
         this.config = config;
     }
 
+    public httpInstance(): Web3 {
+        return new Web3(
+            new Web3.providers.HttpProvider(
+                this.config.get('MAIN_NETWORK_HTTP_HOST')
+            )
+        );
+    }
+
     public websocketInstance(): Web3 {
         return new Web3(
             new Web3.providers.WebsocketProvider(

@@ -12,8 +12,9 @@ export class PromTokenService{
     private readonly logger = new Logger(PromTokenService.name);
 
     private web3: Web3;
-    private config: ConfigService;
     private contract: any;
+    private config: ConfigService;
+    private web3Service: Web3Service;
     private transactionFactory: TransactionFactory;
     private transactionRepository: TransactionRepository;
     private walletRepository: WalletRepository;
@@ -25,6 +26,7 @@ export class PromTokenService{
         transactionRepository: TransactionRepository,
         walletRepository: WalletRepository,
     ) {
+        this.web3Service = web3Service;
         this.config = configService;
         this.web3 = web3Service.websocketInstance();
         this.contract = this.getContract();
@@ -38,7 +40,12 @@ export class PromTokenService{
     }
 
     public async balanceOf(address: string): Promise<any> {
-        return this.contract.methods.balanceOf(address).call();
+        const web3 = this.web3Service.httpInstance();
+        const contract = new web3.eth.Contract(
+            this.config.getPromTokenAbi(),
+            this.config.getPromTokenAddress()
+        );
+        return contract.methods.balanceOf(address).call();
     }
 
     public async transfer(from: Wallets, to: Wallets, value: string): Promise<any> {

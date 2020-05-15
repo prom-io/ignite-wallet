@@ -17,7 +17,6 @@ export class WalletService implements OnModuleInit {
     ) {}
 
     async onModuleInit() {
-        this.logger.debug('Wallet service initialized!');
         if(!await this.walletRepository.existMasterAccount()) {
             await this.generateMaster();
         }

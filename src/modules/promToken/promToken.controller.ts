@@ -1,9 +1,10 @@
-import {Body, Controller, Get, Param, Post, Res} from "@nestjs/common";
+import {Body, Controller, Get, Param, Post, Res, UseGuards} from "@nestjs/common";
 import {TransferHandler} from "./useCase/transfer/transfer.handler";
 import {TransferCommand} from "./useCase/transfer/transfer.command";
 import {Response} from "express";
 import {PromTokenService} from "./services/promToken.service";
 import {PromTokenFetcher} from "./fetchers/promToken.fetcher";
+import {AuthGuard} from "@nestjs/passport";
 
 @Controller('/api/v1/balance')
 export class PromTokenController {

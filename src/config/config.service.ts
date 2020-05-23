@@ -6,6 +6,7 @@ import {Wallets} from "../entities/Wallets";
 import {Transactions} from "../entities/Transactions";
 import {User} from "../entities/User";
 import {RedisModuleAsyncOptions, RedisModuleOptions} from "nestjs-redis";
+import {Transfer} from "../entities/Transfer";
 
 export class ConfigService {
     private readonly envConfig: { [key: string]: string };
@@ -34,7 +35,7 @@ export class ConfigService {
             username: this.get('POSTGRES_USER'),
             password: this.get('POSTGRES_PASSWORD'),
             database: this.get('POSTGRES_DATABASE'),
-            entities: [Wallets, Transactions, User],
+            entities: [Wallets, Transactions, User, Transfer],
             synchronize: true,
             ssl: false,
         };

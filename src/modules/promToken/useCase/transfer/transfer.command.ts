@@ -20,5 +20,5 @@ export class TransferCommand {
     readonly to: string;
 
     @IsNotEmpty()
-    readonly value: string;
+    readonly value: number;
 }

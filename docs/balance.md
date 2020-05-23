@@ -2,6 +2,8 @@
 
 > **Method**: GET
 >
+> **Auth**: False
+>
 > **Action**: /api/v1/balance/:address
 
 ## Пример

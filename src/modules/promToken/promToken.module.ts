@@ -7,10 +7,17 @@ import {WalletRepository} from "../../repositories/WalletRepository";
 import {PromTokenFetcher} from "./fetchers/promToken.fetcher";
 import {TransactionFactory} from "./factories/transaction.factory";
 import {TransactionRepository} from "../../repositories/TransactionRepository";
+import {TransactionFetcher} from "./fetchers/transaction.fetcher";
+import {TransactionController} from "./transaction.controller";
+import {Transactions} from "../../entities/Transactions";
+import {TransferRepository} from "../../repositories/TransferRepository";
+import {TransferPendingCron} from "./transferPending.cron";
+import {GasAddedCron} from "./gasAdded.cron";
+import {TransferController} from "./transfer.controller";
 
 @Module({
     imports: [],
-    controllers: [PromTokenController],
+    controllers: [PromTokenController, TransactionController, TransferController],
     providers: [
         PromTokenService,
         Web3Service,
@@ -19,6 +26,11 @@ import {TransactionRepository} from "../../repositories/TransactionRepository";
         PromTokenFetcher,
         TransactionFactory,
         TransactionRepository,
+        TransferRepository,
+        TransactionFetcher,
+        TransferPendingCron,
+        GasAddedCron,
     ],
+    exports: []
 })
 export class PromTokenModule {}

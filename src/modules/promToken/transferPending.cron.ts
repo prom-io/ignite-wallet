@@ -3,7 +3,7 @@ import {Cron} from "@nestjs/schedule";
 import {WalletRepository} from "../../repositories/WalletRepository";
 import {PromTokenService} from "./services/promToken.service";
 import {TransferRepository} from "../../repositories/TransferRepository";
-import {Transfer} from "../../entities/Transfer";
+import {TransferEntity} from "../../entities/Transfer.entity";
 import asyncForEach from '../../utils/asyncForEach';
 import {TransferEnum} from "./enums/transfer.enum";
 @Injectable()
@@ -28,7 +28,7 @@ export class TransferPendingCron {
             }
 
             const transfers = await this.transferRepository.allPendingTransactions();
-            await asyncForEach(transfers, async (transfer: Transfer) => {
+            await asyncForEach(transfers, async (transfer: TransferEntity) => {
                 await this.promTokenService.sendEther(
                     master,
                     transfer.from,

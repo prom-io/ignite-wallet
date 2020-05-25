@@ -1,7 +1,7 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity()
-export class Transactions {
+@Entity('transfers')
+export class TransferEntity {
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -14,8 +14,8 @@ export class Transactions {
     @Column({ name: 'value' })
     public value: string;
 
-    @Column({ name: 'type' })
-    public type: string;
+    @Column({ name: 'status' })
+    public status: string;
 
     @Column({ type: 'timestamp', name: 'created_at' })
     public createdAt: Date;

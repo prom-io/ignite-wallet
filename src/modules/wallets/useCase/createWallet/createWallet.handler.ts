@@ -2,7 +2,7 @@ import {WalletService} from "../../services/wallet.service";
 import {WalletRepository} from "../../../../repositories/WalletRepository";
 import {WalletFactory} from "../../factories/wallet.factory";
 import {HttpService, Inject, Injectable, UnauthorizedException} from "@nestjs/common";
-import {Wallets} from "../../../../entities/Wallets";
+import {WalletsEntity} from "../../../../entities/Wallets.entity";
 import {ConfigService} from "../../../../config/config.service";
 import {ClientProxy} from "@nestjs/microservices";
 import {RedisService} from "nestjs-redis";
@@ -20,7 +20,7 @@ export class CreateWalletHandler {
         private readonly authService: AuthService,
     ) {}
 
-    public async handle(): Promise<Wallets> {
+    public async handle(): Promise<WalletsEntity> {
         const client = await this.redisService.getClient();
         try {
             const walletDto: WalletDto = await this.walletService.generateWallet();

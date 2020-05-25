@@ -2,7 +2,7 @@
   "type": "postgres",
 
   "host": "127.0.0.1",
-  "port": "5455",
+  "port": "5432",
   "username": "app",
   "password": "secret",
   "database": "app",

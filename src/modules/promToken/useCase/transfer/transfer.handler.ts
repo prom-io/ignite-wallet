@@ -4,7 +4,7 @@ import {PromTokenService} from "../../services/promToken.service";
 import {WalletRepository} from "../../../../repositories/WalletRepository";
 import {ConfigService} from "../../../../config/config.service";
 import {TransferRepository} from "../../../../repositories/TransferRepository";
-import {Transfer} from "../../../../entities/Transfer";
+import {TransferEntity} from "../../../../entities/Transfer.entity";
 import {TransferEnum} from "../../enums/transfer.enum";
 
 @Injectable()
@@ -39,10 +39,10 @@ export class TransferHandler {
         const from = await this.walletRepository.getAccountByAddress(command.from);
         const to = await this.walletRepository.getAccountByAddress(command.to);
 
-        const transfer = new Transfer();
+        const transfer = new TransferEntity();
         transfer.from = from.address;
         transfer.to = to.address;
-        transfer.value = command.value;
+        transfer.value = String(command.value);
         transfer.createdAt = new Date();
         transfer.status = TransferEnum.PENDING;
         await this.transferRepository.save(transfer);

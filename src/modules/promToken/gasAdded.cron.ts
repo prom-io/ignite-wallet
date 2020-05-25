@@ -3,7 +3,7 @@ import {Cron} from "@nestjs/schedule";
 import {WalletRepository} from "../../repositories/WalletRepository";
 import {PromTokenService} from "./services/promToken.service";
 import {TransferRepository} from "../../repositories/TransferRepository";
-import {Transfer} from "../../entities/Transfer";
+import {TransferEntity} from "../../entities/Transfer.entity";
 import asyncForEach from '../../utils/asyncForEach';
 import {TransferEnum} from "./enums/transfer.enum";
 @Injectable()
@@ -22,7 +22,7 @@ export class GasAddedCron {
             this.logger.debug('Gas added processing start!');
 
             const transfers = await this.transferRepository.allGasAddedTransactions();
-            await asyncForEach(transfers, async (transfer: Transfer) => {
+            await asyncForEach(transfers, async (transfer: TransferEntity) => {
                 const from = await this.walletRepository.getAccountByAddress(transfer.from);
                 const to = await this.walletRepository.getAccountByAddress(transfer.to);
                 await this.promTokenService.transfer(from, to, transfer.value);

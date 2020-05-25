@@ -1,4 +1,4 @@
-import {Transactions} from "../../../entities/Transactions";
+import {TransactionsEntity} from "../../../entities/Transactions.entity";
 import {TransactionTypes} from "../../../enums/transaction.types";
 
 export class TransactionFactory {
@@ -8,8 +8,8 @@ export class TransactionFactory {
         return transaction;
     }
 
-    private static build(dto: TransactionDto): Transactions {
-        const transaction = new Transactions();
+    private static build(dto: TransactionDto): TransactionsEntity {
+        const transaction = new TransactionsEntity();
         transaction.from = dto.from;
         transaction.to = dto.to;
         transaction.value = dto.value;

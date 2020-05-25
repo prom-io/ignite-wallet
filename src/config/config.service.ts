@@ -2,11 +2,11 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import {AbiItem} from 'web3-utils';
 import {TypeOrmModuleOptions} from "@nestjs/typeorm";
-import {Wallets} from "../entities/Wallets";
-import {Transactions} from "../entities/Transactions";
-import {User} from "../entities/User";
+import {WalletsEntity} from "../entities/Wallets.entity";
+import {TransactionsEntity} from "../entities/Transactions.entity";
+import {UserEntity} from "../entities/User.entity";
 import {RedisModuleAsyncOptions, RedisModuleOptions} from "nestjs-redis";
-import {Transfer} from "../entities/Transfer";
+import {TransferEntity} from "../entities/Transfer.entity";
 
 export class ConfigService {
     private readonly envConfig: { [key: string]: string };
@@ -35,7 +35,7 @@ export class ConfigService {
             username: this.get('POSTGRES_USER'),
             password: this.get('POSTGRES_PASSWORD'),
             database: this.get('POSTGRES_DATABASE'),
-            entities: [Wallets, Transactions, User, Transfer],
+            entities: [WalletsEntity, TransactionsEntity, UserEntity, TransferEntity],
             synchronize: true,
             ssl: false,
         };

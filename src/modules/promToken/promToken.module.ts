@@ -9,7 +9,6 @@ import {TransactionFactory} from "./factories/transaction.factory";
 import {TransactionRepository} from "../../repositories/TransactionRepository";
 import {TransactionFetcher} from "./fetchers/transaction.fetcher";
 import {TransactionController} from "./transaction.controller";
-import {Transactions} from "../../entities/Transactions";
 import {TransferRepository} from "../../repositories/TransferRepository";
 import {TransferPendingCron} from "./transferPending.cron";
 import {GasAddedCron} from "./gasAdded.cron";

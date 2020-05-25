@@ -1,7 +1,7 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity('transfers')
-export class Transfer {
+@Entity('transactions')
+export class TransactionsEntity {
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -12,10 +12,16 @@ export class Transfer {
     public to: string;
 
     @Column({ name: 'value' })
-    public value: number;
+    public value: string;
 
-    @Column({ name: 'status' })
-    public status: string;
+    @Column({ name: 'transaction_hash' })
+    public transactionHash: string;
+
+    @Column({ type: 'jsonb', name: 'raw_transaction' })
+    public rawTransaction: object;
+
+    @Column({ name: 'type' })
+    public type: string;
 
     @Column({ type: 'timestamp', name: 'created_at' })
     public createdAt: Date;

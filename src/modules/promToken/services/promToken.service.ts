@@ -2,7 +2,7 @@ import {Injectable, Logger, OnModuleInit} from "@nestjs/common";
 import {Web3Service} from "../../web3/web3.service";
 import Web3 from 'web3';
 import {ConfigService} from "../../../config/config.service";
-import {Wallets} from "../../../entities/Wallets";
+import {WalletsEntity} from "../../../entities/Wallets.entity";
 import {TransactionFactory} from "../factories/transaction.factory";
 import {TransactionRepository} from "../../../repositories/TransactionRepository";
 import {WalletRepository} from "../../../repositories/WalletRepository";
@@ -35,7 +35,7 @@ export class PromTokenService{
         this.walletRepository = walletRepository;
     }
 
-    public async sendEther(from: Wallets, to: string, value: string) {
+    public async sendEther(from: WalletsEntity, to: string, value: string) {
         const nonce = await this.web3.eth.getTransactionCount(from.address);
         const amountToSend = this.toWeiConvert(value);
         const rawTransaction = {
@@ -76,8 +76,8 @@ export class PromTokenService{
         return contract.methods.balanceOf(address).call();
     }
 
-    public async transfer(from: Wallets, to: Wallets, value: number): Promise<any> {
-        const transfer = await this.contract.methods.transfer(to.address, value);
+    public async transfer(from: WalletsEntity, to: WalletsEntity, value: string): Promise<any> {
+        const transfer = await this.contract.methods.transfer(to.address, Number(value));
         const transferAbi = transfer.encodeABI();
         const count = await this.web3.eth.getTransactionCount(from.address);
         const signedTx = await this.web3.eth.accounts.signTransaction({
@@ -101,11 +101,14 @@ export class PromTokenService{
     public transferListener() {
         this.contract.events.Transfer({}, (error, event) => {})
             .on('data', async (event) => {
+                console.log(event);
                 const dto: TransactionDto = event.returnValues;
                 const fromExist = await this.walletRepository.existAccount(dto.from);
                 const toExist = await this.walletRepository.existAccount(dto.to);
                 if(fromExist || toExist) {
                     const transaction = this.transactionFactory.createTransferTransaction(dto);
+                    transaction.transactionHash = event.transactionHash;
+                    transaction.rawTransaction = event;
                     await this.transactionRepository.save(transaction);
                     this.logger.debug('Transaction saved!');
                 }

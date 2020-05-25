@@ -1,14 +1,12 @@
 import {EntityManager, EntityRepository, Repository} from "typeorm";
-import {Wallets} from "../entities/Wallets";
-import {WalletTypes} from "../enums/wallet.types";
-import {User} from "../entities/User";
+import {UserEntity} from "../entities/User.entity";
 
 @EntityRepository()
 export class UserRepository {
 
     constructor(private manager: EntityManager) {}
 
-    public findOne(username: string): Promise<User | undefined> {
-        return this.manager.findOne(User, { where: { username } });
+    public findOne(username: string): Promise<UserEntity | undefined> {
+        return this.manager.findOne(UserEntity, { where: { username } });
     }
 }

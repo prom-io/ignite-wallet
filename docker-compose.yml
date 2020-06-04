@@ -36,7 +36,9 @@ services:
     depends_on:
       - ignite-wallet-postgres
   ignite-wallet-redis:
-    image: redis:3-alpine
+    build:
+      context: .
+      dockerfile: redis.docker
     ports:
       - ${REDIS_PORT}:${REDIS_PORT}
     volumes:

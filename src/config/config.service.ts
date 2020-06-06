@@ -26,6 +26,10 @@ export class ConfigService {
         };
     }
 
+    getPromTokenDecimal() {
+        return 10 ** 18;
+    }
+
 
     getTypeOrmConfig(): TypeOrmModuleOptions {
         return {

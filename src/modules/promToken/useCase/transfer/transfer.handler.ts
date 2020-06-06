@@ -18,13 +18,13 @@ export class TransferHandler {
 
     public async handle(command: TransferCommand): Promise<void> {
 
-        if(!await this.walletRepository.existAccount(command.from)) {
-            throw new NotFoundException(`${command.from} not registered`);
-        }
+        // if(!await this.walletRepository.existAccount(command.from)) {
+        //     throw new NotFoundException(`${command.from} not registered`);
+        // }
 
-        if(!await this.walletRepository.existAccount(command.to)) {
-            throw new NotFoundException(`${command.to} not registered`);
-        }
+        // if(!await this.walletRepository.existAccount(command.to)) {
+        //     throw new NotFoundException(`${command.to} not registered`);
+        // }
 
         if(command.from === command.to) {
             throw new BadRequestException('From and to should be different!')
@@ -36,12 +36,12 @@ export class TransferHandler {
             throw new BadRequestException('Not enough funds on the balance of the PromToken!')
         }
 
-        const from = await this.walletRepository.getAccountByAddress(command.from);
-        const to = await this.walletRepository.getAccountByAddress(command.to);
+        // const from = await this.walletRepository.getAccountByAddress(command.from);
+        // const to = await this.walletRepository.getAccountByAddress(command.to);
 
         const transfer = new TransferEntity();
-        transfer.from = from.address;
-        transfer.to = to.address;
+        transfer.from = command.from;
+        transfer.to = command.to;
         transfer.value = String(command.value);
         transfer.createdAt = new Date();
         transfer.status = TransferEnum.PENDING;

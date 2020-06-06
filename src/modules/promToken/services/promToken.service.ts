@@ -76,8 +76,8 @@ export class PromTokenService{
         return contract.methods.balanceOf(address).call();
     }
 
-    public async transfer(from: WalletsEntity, to: WalletsEntity, value: string): Promise<any> {
-        const transfer = await this.contract.methods.transfer(to.address, Number(value));
+    public async transfer(from: WalletsEntity, to: WalletsEntity, value: number): Promise<any> {
+        const transfer = await this.contract.methods.transfer(to.address, value.toString());
         const transferAbi = transfer.encodeABI();
         const count = await this.web3.eth.getTransactionCount(from.address);
         const signedTx = await this.web3.eth.accounts.signTransaction({
@@ -87,7 +87,6 @@ export class PromTokenService{
             data: transferAbi,
             gas: 109973,
         }, from.privateKey);
-
         return this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
     }
 

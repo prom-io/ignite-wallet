@@ -1,4 +1,4 @@
-import {BadRequestException, Injectable, NotFoundException} from "@nestjs/common";
+import {BadRequestException, ConflictException, Injectable, NotFoundException} from "@nestjs/common";
 import {TransferCommand} from "./transfer.command";
 import {PromTokenService} from "../../services/promToken.service";
 import {WalletRepository} from "../../../../repositories/WalletRepository";
@@ -17,14 +17,25 @@ export class TransferHandler {
     ) {}
 
     public async handle(command: TransferCommand): Promise<void> {
+        const pending = await this.transferRepository.findFromPendingTransfer(command.from);
+        const gasAdded = await this.transferRepository.findFromGasAddTransfer(command.from);
 
-        // if(!await this.walletRepository.existAccount(command.from)) {
-        //     throw new NotFoundException(`${command.from} not registered`);
-        // }
+        if(pending instanceof TransferEntity) {
+            throw new ConflictException('Transfer exists!');
+        }
 
-        // if(!await this.walletRepository.existAccount(command.to)) {
-        //     throw new NotFoundException(`${command.to} not registered`);
-        // }
+        if(gasAdded instanceof TransferEntity) {
+            throw new ConflictException('Transfer exists!');
+        }
+
+
+        if(!await this.walletRepository.existAccount(command.from)) {
+            throw new NotFoundException(`${command.from} not registered`);
+        }
+
+        if(!await this.walletRepository.existAccount(command.to)) {
+            throw new NotFoundException(`${command.to} not registered`);
+        }
 
         if(command.from === command.to) {
             throw new BadRequestException('From and to should be different!')
@@ -36,12 +47,12 @@ export class TransferHandler {
             throw new BadRequestException('Not enough funds on the balance of the PromToken!')
         }
 
-        // const from = await this.walletRepository.getAccountByAddress(command.from);
-        // const to = await this.walletRepository.getAccountByAddress(command.to);
+        const from = await this.walletRepository.getAccountByAddress(command.from);
+        const to = await this.walletRepository.getAccountByAddress(command.to);
 
         const transfer = new TransferEntity();
-        transfer.from = command.from;
-        transfer.to = command.to;
+        transfer.from = from.address;
+        transfer.to = to.address;
         transfer.value = String(command.value);
         transfer.createdAt = new Date();
         transfer.status = TransferEnum.PENDING;

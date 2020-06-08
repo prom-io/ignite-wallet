@@ -28,4 +28,18 @@ export class TransferRepository {
             .setParameters({ from: address });
         return paginate<TransferEntity>(queryBuilder, options);
     }
+
+    async findFromPendingTransfer(from: string) {
+        return this.manager.findOne(TransferEntity, {
+            from,
+            status: TransferEnum.PENDING
+        });
+    }
+
+    async findFromGasAddTransfer(from: string) {
+        return this.manager.findOne(TransferEntity, {
+            from,
+            status: TransferEnum.GAS_ADD
+        });
+    }
 }

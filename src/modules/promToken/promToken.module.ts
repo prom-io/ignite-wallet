@@ -13,6 +13,7 @@ import {TransferRepository} from "../../repositories/TransferRepository";
 import {TransferPendingCron} from "./transferPending.cron";
 import {GasAddedCron} from "./gasAdded.cron";
 import {TransferController} from "./transfer.controller";
+import {TransferService} from "./services/transfer.service";
 
 @Module({
     imports: [],
@@ -29,6 +30,7 @@ import {TransferController} from "./transfer.controller";
         TransactionFetcher,
         TransferPendingCron,
         GasAddedCron,
+        TransferService
     ],
     exports: []
 })

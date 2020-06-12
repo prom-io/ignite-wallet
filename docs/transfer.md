@@ -116,3 +116,41 @@ Status: 200
 }
 ```
 
+----------------------------------------------------------------------------
+## Api для проверки на наличие активной транзакции
+
+> **Method**: GET
+>
+> **Auth**: False
+>
+> **Action**: /api/v1/transfer/check-active/:address
+
+### Описание параметров запроса
+
+Валидация:
+```json
+{
+  "address": "required|string"
+}
+```
+
+1. address - Адрес кошелька
+
+### Пример
+
+##### Заголовок
+1. Content-Type: application/json
+
+##### Запрос
+http://localhost:3000/api/v1/transfer/check-active/0x959FD7Ef9089B7142B6B908Dc3A8af7Aa8ff0FA1
+
+##### Ответ
+
+Status: 200
+
+```json
+{
+    "result": false
+}
+```
+

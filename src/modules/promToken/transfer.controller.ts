@@ -9,6 +9,7 @@ import {TransactionRepository} from "../../repositories/TransactionRepository";
 import {AuthGuard} from "@nestjs/passport";
 import {TransferRepository} from "../../repositories/TransferRepository";
 import {TransferEnum} from "./enums/transfer.enum";
+import {TransferService} from "./services/transfer.service";
 
 @Controller('/api/v1/transfer')
 export class TransferController {
@@ -16,7 +17,14 @@ export class TransferController {
     constructor(
         private readonly repository: TransferRepository,
         private readonly transferHandler: TransferHandler,
+        private readonly transferService: TransferService
     ) {}
+
+    @Get('/check-active/:address')
+    public async checkActive(@Param('address') address: string, @Res() res: Response) {
+        const result = await this.transferService.checkActiveTransfer(address);
+        return res.status(200).send({result})
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Post('/')

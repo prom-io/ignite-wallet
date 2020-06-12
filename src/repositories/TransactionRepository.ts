@@ -15,6 +15,7 @@ export class TransactionRepository {
         queryBuilder
             .where('c.from = :from')
             .orWhere('c.to = :to')
+            .orderBy('c.createdAt', 'DESC')
             .setParameters({ from: address, to: address });
         return paginate<TransactionsEntity>(queryBuilder, options);
     }

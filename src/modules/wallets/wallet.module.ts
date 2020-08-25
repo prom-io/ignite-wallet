@@ -28,7 +28,8 @@ import {AuthService} from "./services/igniteBackend/auth.service";
         RedisModule.forRootAsync({
             useFactory: (configService: ConfigService) => configService.getRedisConfig(),
             inject: [ConfigService]
-        })
+        }),
+        
     ],
     controllers: [WalletController],
     providers: [
@@ -38,7 +39,7 @@ import {AuthService} from "./services/igniteBackend/auth.service";
         WalletRepository,
         Web3Service,
         WalletFetcher,
-        AuthService,
+        AuthService
     ],
 })
 export class WalletModule {}

@@ -7,6 +7,7 @@ import {ConfigService} from "./config/config.service";
 import {PromTokenModule} from "./modules/promToken/promToken.module";
 import {UserModule} from "./modules/users/user.module";
 import {ScheduleModule} from "@nestjs/schedule";
+import { LoggerModule } from './logging';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import {ScheduleModule} from "@nestjs/schedule";
       WalletModule,
       PromTokenModule,
       UserModule,
+      LoggerModule
   ],
   controllers: [],
   providers: [],

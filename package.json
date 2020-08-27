@@ -44,7 +44,7 @@
     "ethereumjs-util": "^6.2.0",
     "global": "^4.4.0",
     "hdkey": "^1.1.2",
-    "nest-logger": "2.1.0",
+    "nest-logger": "^6.0.0",
     "nestjs-redis": "^1.2.7",
     "nestjs-typeorm-paginate": "^2.0.3",
     "passport": "^0.4.1",

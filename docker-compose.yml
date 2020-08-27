@@ -13,7 +13,8 @@ services:
       - ignite-wallet-postgres
       - ignite-wallet-redis
     volumes:
-    - /app/node_modules
+      - /data/ignite-wallet/backend/logs:/app/logs
+      - /app/node_modules
   ignite-wallet-postgres:
     init: true
     image: postgres:12.2-alpine

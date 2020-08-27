@@ -1,20 +1,15 @@
-import {Global, Module} from "@nestjs/common";
-import {LoggerService, LoggerTransport} from "nest-logger";
-
+import {Global, Module} from '@nestjs/common';
+import {LoggerService} from 'nest-logger';
+import {loggerServiceInstance} from './logger-service-instance';
 
 @Global()
 @Module({
     providers: [
         {
             provide: LoggerService,
-            useValue: new LoggerService(
-                process.env.LOGGING_LEVEL,
-                "loggingService",
-                [LoggerTransport.CONSOLE]
-            )
-        }
+            useValue: loggerServiceInstance,
+        },
     ],
-    exports: [LoggerService]
+    exports: [LoggerService],
 })
-export class LoggerModule {
-}
+export class LoggerModule {}
